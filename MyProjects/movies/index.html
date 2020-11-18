@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta https-equiv="x-ua-compatible" content="ie=edge">
+  <link rel="icon" href="data:;base64,=">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
+  <title>MovieSearch</title>
+</head>
+
+<body>
+  <header>
+    <h1 class="navbar-brand logo h1 text-info">MovieSearch</h1>
+    <img class="nav-bar__logo__img" src="src/assets/img/movieSearch.jpg">
+  </header>
+  <main>
+    <div class="wrapper-form">
+      <form class="form-group" autocomplete="off">
+        <div class="form-row">
+          <input autofocus="" class="search-input form-control form-control-lg" type="text" x-webkit-speech
+            placeholder="Search" id="input">
+          <button id="submit-bottom" class="btn btn-info my-2 my-lg-0" type="submit" data-toggle="tooltip"
+            data-html="true" data-placement="bottom" title="">
+            Search
+          </button>
+          <div class="spinner-border text-primary d-none" role="status">
+            <span class="sr-only">Search...</span>
+          </div>
+          <button class="clear-input-btn" type="button" data-toggle="tooltip" data-html="true" data-placement="bottom"
+            title="">
+            X
+          </button>
+          <button class="keyboard-input-btn" type="button" data-toggle="tooltip" data-html="true"
+            data-placement="bottom" title=""><img src="src/assets/img/keyboard.svg" style="width:35px; height: 35px;">
+          </button>
+          <button class="speak-btn" type="button" data-toggle="tooltip" data-html="true" data-placement="bottom"
+            title=""></button>
+        </div>
+      </form>
+    </div>
+    <p class="info">There are too many results. Start search!</p>
+    <div class="wrapper-slider">
+      <div class="slider">
+        <div class="swiper-container swiper-container-initialized swiper-container-horizontal" style="cursor: grab;">
+          <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
+          </div>
+          <div class="swiper-btn swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide"
+            aria-disabled="false"></div>
+          <div class="swiper-btn swiper-button-next" tabindex="0" role="button" aria-label="Next slide"
+            aria-disabled="false"></div>
+          <div class="swiper-scrollbar"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <a class="footer-link" href="https://rs.school/">
+      <h5 class="text-muted">SR-School 2020q1</h5>
+    </a>
+    <a class="footer-link" href="https://github.com/Jelika">
+      <img class="github-logo" src="src/assets/img/github.png">
+      <h5 class="text-muted github">Jelika GitHub</h5>
+      </sp>
+    </a>
+  </footer>
+</body>
+
+</html>
