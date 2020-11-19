@@ -1,8 +1,10 @@
+/* eslint-disable */
 const path = require('path');
 //const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ASSET_PATH = process.env.ASSET_PATH || '/';
 
 module.exports = (env, options) => {
     const isProduction = options.mode === 'production'
@@ -12,6 +14,7 @@ module.exports = (env, options) => {
         output: {
             filename: 'bundle.js',
             path: path.resolve(__dirname, './dist'),
+            publicPath: ASSET_PATH
         },
         devServer: {
             overlay: true,

@@ -19,32 +19,25 @@
 <body>
   <header>
     <h1 class="navbar-brand logo h1 text-info">MovieSearch</h1>
-    <img class="nav-bar__logo__img" src="src/assets/img/movieSearch.jpg">
   </header>
   <main>
     <div class="wrapper-form">
       <form class="form-group" autocomplete="off">
         <div class="form-row">
           <input autofocus="" class="search-input form-control form-control-lg" type="text" x-webkit-speech
-            placeholder="Search" id="input">
-          <button id="submit-bottom" class="btn btn-info my-2 my-lg-0" type="submit" data-toggle="tooltip"
-            data-html="true" data-placement="bottom" title="">
+            placeholder="Start typing..." id="input">
+          <button id="submit-bottom" class="btn btn-info" type="submit" data-toggle="tooltip" data-html="true"
+            data-placement="bottom" title="">
             Search
           </button>
           <div class="spinner-border text-primary d-none" role="status">
             <span class="sr-only">Search...</span>
           </div>
-          <button class="clear-input-btn" type="button" data-toggle="tooltip" data-html="true" data-placement="bottom"
-            title="">
-            X
-          </button>
-          <button class="keyboard-input-btn" type="button" data-toggle="tooltip" data-html="true"
-            data-placement="bottom" title=""><img src="src/assets/img/keyboard.svg" style="width:35px; height: 35px;">
-          </button>
-          <button class="speak-btn" type="button" data-toggle="tooltip" data-html="true" data-placement="bottom"
-            title=""></button>
+          <a href="#" class="close d-none clear-input-btn"></a>
         </div>
       </form>
+      <div class="select-wraper">
+      <select id="selectElementId"></select></div>
     </div>
     <p class="info">There are too many results. Start search!</p>
     <div class="wrapper-slider">
@@ -62,9 +55,6 @@
     </div>
   </main>
   <footer class="footer">
-    <a class="footer-link" href="https://rs.school/">
-      <h5 class="text-muted">SR-School 2020q1</h5>
-    </a>
     <a class="footer-link" href="https://github.com/Jelika">
       <img class="github-logo" src="src/assets/img/github.png">
       <h5 class="text-muted github">Jelika GitHub</h5>
