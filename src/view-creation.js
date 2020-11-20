@@ -16,9 +16,6 @@ const {
 let { pageNumber, queryYear } = variables;
 
 export function createSlide(poster, year, title, imdbID, imdbRating) {
-
-       // eslint-disable-next-line
-       debugger;
   let slide = `
               <div class="swiper-slide" style="width: 492px; margin-right: 30px;">
                   <div class="card">
@@ -60,7 +57,8 @@ export function generateDropDownYears() {
     queryYear = yearSelector.options[yearSelector.selectedIndex].text;
   });
 }
-export const addListeners = () => {
+
+export function addListeners() {
   formComponent.addEventListener("submit", (event) => {
     event.preventDefault();
     submitClick();
@@ -96,4 +94,4 @@ export const addListeners = () => {
       }
     }
   });
-};
+}
