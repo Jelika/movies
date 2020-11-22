@@ -1,19 +1,55 @@
-import { globalConstants } from "./index";
-import { variables } from "./index";
 import { submitClick } from "./functionality-model";
 import { getMovieInfo } from "./functionality-model";
 import { getTranslateWord } from "./functionality-model";
+import Swiper from "swiper";
 
-const {
-  spinner,
-  closeButton,
-  formComponent,
-  inputField,
-  yearSelector,
-  filmListSwiper,
-} = globalConstants;
+/** Global constants section */
+export const globalConstants = {
+  infoContainer: document.querySelector(".info"),
+  spinner: document.querySelector(".spinner-border"),
+  formComponent: document.querySelector(".form-group"),
+  closeButton: document.querySelector(".clear-input-btn"),
+  inputField: document.querySelector("#input"),
+  yearSelector: document.querySelector("#selectElementId"),
+  filmListSwiper: new Swiper(".swiper-container", {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    direction: "horizontal",
+    initialSlide: 0,
+    breakpoints: {
+      320: {
+        slidesPerView: 1,
+      },
+      768: {
+        slidesPerView: 2,
+        spaceBetween: 30,
+      },
 
-let { pageNumber, queryYear } = variables;
+      1200: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      dynamicBullets: true,
+      clickable: true,
+      dynamicMainBullets: 10,
+    },
+  }),
+};
+/** */
+
+/** Global variables section */
+export let variables = {
+  pageNumber: 1,
+  queryYear: "",
+};
+/** */
 
 export function createSlide(poster, year, title, imdbID, imdbRating) {
   let slide = `
@@ -32,9 +68,9 @@ export function createSlide(poster, year, title, imdbID, imdbRating) {
                   </div>
               </div>`;
 
-  filmListSwiper.appendSlide(slide);
-  filmListSwiper.update();
-  spinner.classList.add("d-none");
+              globalConstants.filmListSwiper.appendSlide(slide);
+              globalConstants.filmListSwiper.update();
+  globalConstants.spinner.classList.add("d-none");
 }
 
 export function generateDropDownYears() {
@@ -52,45 +88,45 @@ export function generateDropDownYears() {
     option.innerHTML = i;
     select.appendChild(option);
   }
-  yearSelector.addEventListener("click", () => {
+  globalConstants.yearSelector.addEventListener("click", () => {
     // eslint-disable-next-line
-    queryYear = yearSelector.options[yearSelector.selectedIndex].text;
+    variables.queryYear = globalConstants.yearSelector.options[globalConstants.yearSelector.selectedIndex].text;
   });
 }
 
 export function addListeners() {
-  formComponent.addEventListener("submit", (event) => {
+  globalConstants.formComponent.addEventListener("submit", (event) => {
     event.preventDefault();
     submitClick();
   });
 
-  closeButton.addEventListener("click", () => {
-    inputField.value = "";
-    closeButton.classList.add("d-none");
+  globalConstants.closeButton.addEventListener("click", () => {
+    globalConstants.inputField.value = "";
+    globalConstants.closeButton.classList.add("d-none");
   });
 
-  inputField.addEventListener("keyup", () => {
-    if (inputField.value) {
-      closeButton.classList.remove("d-none");
+  globalConstants.inputField.addEventListener("keyup", () => {
+    if (globalConstants.inputField.value) {
+      globalConstants.closeButton.classList.remove("d-none");
     } else {
-      closeButton.classList.add("d-none");
+      globalConstants.closeButton.classList.add("d-none");
     }
   });
 
-  filmListSwiper.on("init", () => {
-    filmListSwiper.slideTo(0);
+  globalConstants.filmListSwiper.on("init", () => {
+    globalConstants.filmListSwiper.slideTo(0);
   });
 
-  filmListSwiper.on("slideChange", () => {
+  globalConstants.filmListSwiper.on("slideChange", () => {
     const regexLangRus = /(^[А-я0-9\s]+)(?!.*[A-z])/;
-    const preloadFilms = filmListSwiper.activeIndex % 6 === 0;
-    if (preloadFilms && filmListSwiper.activeIndex != 0) {
+    const preloadFilms = globalConstants.filmListSwiper.activeIndex % 6 === 0;
+    if (preloadFilms && globalConstants.filmListSwiper.activeIndex != 0) {
       const keyWord = document.querySelector("#input").value;
-      pageNumber += 1;
+      variables.pageNumber += 1;
       if (regexLangRus.exec(keyWord)) {
-        getTranslateWord(keyWord, pageNumber);
+        getTranslateWord(keyWord, variables.pageNumber);
       } else {
-        getMovieInfo(keyWord, pageNumber);
+        getMovieInfo(keyWord, variables.pageNumber);
       }
     }
   });

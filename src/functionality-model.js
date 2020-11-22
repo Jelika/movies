@@ -1,5 +1,5 @@
-import { globalConstants } from "./index";
-import { variables } from "./index";
+import { globalConstants } from "./view-creation";
+import { variables } from "./view-creation";
 import { createSlide } from "./view-creation";
 
 const { infoContainer, spinner, inputField, filmListSwiper } = globalConstants;
