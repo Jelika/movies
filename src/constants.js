@@ -1,7 +1,8 @@
+'use strict';
 import Swiper from "swiper";
 
 /** Global constants section */
-export const globalConstants = {
+export var globalConstants = {
   infoContainer: document.querySelector(".info"),
   spinner: document.querySelector(".spinner-border"),
   formComponent: document.querySelector(".form-group"),
@@ -42,7 +43,7 @@ export const globalConstants = {
 /** */
 
 /** Global variables section */
-export let variables = {
+export var variables = {
   pageNumber: 1,
   queryYear: "",
 };
