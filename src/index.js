@@ -1,7 +1,8 @@
 import "./style.css";
 import "swiper/swiper-bundle.css";
-import {getMovieInfo} from "./functionality-model";
-import {generateDropDownYears,addListeners} from "./view-creation";
+import {getMovieInfo} from "./functionality";
+import {generateDropDownYears} from "./view-creation";
+import {addListeners} from "./events-creation"
 
 window.onload = () => {
   getMovieInfo("Dream", 1);
