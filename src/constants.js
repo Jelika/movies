@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 import Swiper from "swiper";
 
 /** Global constants section */

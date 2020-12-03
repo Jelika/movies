@@ -45,7 +45,7 @@ export function getMovieInfo(keyWord, page, shouldTranslate) {
         if (shouldTranslate) {
           globalConstants.filmListSwiper.removeAllSlides();
           globalConstants.filmListSwiper.update();
-        };
+        }
         date.Search.forEach(function (element) {
           var poster = element.Poster === "N/A" ? "" : element.Poster;
           var year = element.Year;
@@ -66,7 +66,7 @@ export function getMovieInfo(keyWord, page, shouldTranslate) {
         globalConstants.spinner.classList.add("d-none");
         console.log("Error: ", date.Error);
         globalConstants.infoContainer.innerText = date.Error;
-      };
+      }
     });
 }
 
@@ -90,5 +90,5 @@ export function searchClick() {
       globalConstants.infoContainer.innerText =
         'No results for "' + keyWord + '"';
     }
-  };
+  }
 }
