@@ -1,8 +1,11 @@
 "use strict";
-import Swiper from "swiper";
+
+/**Import section */
+var Swiper = require('swiper').Swiper;
+/** */
 
 /** Global constants section */
-export var globalConstants = {
+var globalConstants = {
   infoContainer: document.querySelector(".info"),
   spinner: document.querySelector(".spinner-border"),
   formComponent: document.querySelector(".form-group"),
@@ -43,8 +46,12 @@ export var globalConstants = {
 /** */
 
 /** Global variables section */
-export var variables = {
+var variables = {
   pageNumber: 1,
   queryYear: "",
 };
 /** */
+module.exports = {
+  variables:variables,
+  globalConstants:globalConstants,
+};

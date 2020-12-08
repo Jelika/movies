@@ -1,11 +1,14 @@
 "use strict";
-import { globalConstants } from "./constants";
-import { variables } from "./constants";
-import { searchClick } from "./functionality";
-import { getMovieInfo } from "./functionality";
-import { getTranslateWord } from "./functionality";
 
-export function addListeners() {
+/**Import section */
+var globalConstants = require('./constants').globalConstants;
+var variables = require('./constants').variables;
+var searchClick = require('./functionality').searchClick;
+var  getMovieInfo = require('./functionality'). getMovieInfo;
+var getTranslateWord = require('./functionality').getTranslateWord;
+/** */
+
+function addListeners() {
   globalConstants.formComponent.addEventListener("submit", function (event) {
     event.preventDefault();
     searchClick();
@@ -42,3 +45,6 @@ export function addListeners() {
     }
   });
 }
+module.exports = {
+  addListeners:addListeners,
+};

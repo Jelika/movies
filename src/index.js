@@ -1,12 +1,15 @@
 "use strict";
-import "./style.css";
-import "swiper/swiper-bundle.css";
-import { getMovieInfo } from "./functionality";
-import { generateDropDownYears } from "./view-creation";
-import { addListeners } from "./events-creation";
+
+/**Import section */
+require("./style.css");
+require("swiper/swiper-bundle.css");
+var  getMovieInfo = require('./functionality').getMovieInfo;
+var generateDropDownYears = require('./view-creation').generateDropDownYears;
+var   addListeners = require('./events-creation').addListeners;
+/** */
 
 window.onload = function () {
-  getMovieInfo("Dream", 1);
+  getMovieInfo("Home", 1);
   generateDropDownYears();
   addListeners();
 };

@@ -1,8 +1,11 @@
 "use strict";
-import { globalConstants } from "./constants";
-import { variables } from "./constants";
 
-export function createSlide(poster, year, title, imdbID, imdbRating) {
+/**Import section */
+var globalConstants = require('./constants').globalConstants;
+var variables = require('./constants').variables;
+/** */
+
+function createSlide(poster, year, title, imdbID, imdbRating) {
   var slide =
     '<div class="swiper-slide" style="width: 492px; margin-right: 30px;">' +
     '<div class="card">' +
@@ -36,7 +39,7 @@ export function createSlide(poster, year, title, imdbID, imdbRating) {
   globalConstants.spinner.classList.add("d-none");
 }
 
-export function generateDropDownYears() {
+function generateDropDownYears() {
   var min = 2020,
     max = 1960,
     select = document.getElementById("selectElementId"),
@@ -59,3 +62,7 @@ export function generateDropDownYears() {
       ].text;
   });
 }
+module.exports = {
+  createSlide:createSlide,
+  generateDropDownYears:generateDropDownYears,
+};
