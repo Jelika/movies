@@ -8,21 +8,28 @@ export function getTranslateWord(word, page, shouldTranslate) {
     "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200505T162523Z.33ff202967427e1b.2d537f5864213fe73f92105d302ab7486efc9940&text=" +
     word +
     "&lang=ru-en";
-  fetch(url)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (date) {
-      return date.text.join("");
-    })
-    .then(function (word) {
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", url, true);
+  xhr.send();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState != 4) {
+      return;
+    }
+
+    if (xhr.status === 200) {
+      console.log("res", xhr.responseText);
+      var word = JSON.parse(xhr.responseText).text.join("");
       if (shouldTranslate === true) {
         getMovieInfo(word, page, shouldTranslate);
       } else {
         getMovieInfo(word, page);
       }
       globalConstants.infoContainer.innerText = "Showing results for " + word;
-    });
+    } else {
+      console.log("err with translate", xhr.responseText);
+    }
+  };
 }
 
 export function getMovieInfo(keyWord, page, shouldTranslate) {
@@ -34,40 +41,51 @@ export function getMovieInfo(keyWord, page, shouldTranslate) {
     "&y=" +
     variables.queryYear +
     "&apikey=e1ab60a9";
+
   globalConstants.spinner.classList.remove("d-none");
-  console.log(url);
-  fetch(url)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (date) {
-      if (date.Response === "True") {
-        if (shouldTranslate) {
-          globalConstants.filmListSwiper.removeAllSlides();
-          globalConstants.filmListSwiper.update();
-        }
-        date.Search.forEach(function (element) {
-          var poster = element.Poster === "N/A" ? "" : element.Poster;
-          var year = element.Year;
-          var title = element.Title;
-          var imdbID = element.imdbID;
-          var urlRating =
-            "https://www.omdbapi.com/?i=" + imdbID + "&apikey=e1ab60a9";
-          fetch(urlRating)
-            .then(function (result) {
-              return result.json();
-            })
-            .then(function (res) {
-              var imdbRating = res.imdbRating;
-              createSlide(poster, year, title, imdbID, imdbRating);
-            });
-        });
-      } else {
-        globalConstants.spinner.classList.add("d-none");
-        console.log("Error: ", date.Error);
-        globalConstants.infoContainer.innerText = date.Error;
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", url, true);
+  xhr.send();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState != 4) {
+      return;
+    }
+    if (xhr.status === 200) {
+      var date = JSON.parse(xhr.responseText);
+      console.log("res", date.Search);
+      if (shouldTranslate) {
+        globalConstants.filmListSwiper.removeAllSlides();
+        globalConstants.filmListSwiper.update();
       }
-    });
+      date.Search.forEach(function (element) {
+        var poster = element.Poster === "N/A" ? "" : element.Poster;
+        var year = element.Year;
+        var title = element.Title;
+        var imdbID = element.imdbID;
+        var urlRating =
+          "https://www.omdbapi.com/?i=" + imdbID + "&apikey=e1ab60a9";
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", urlRating, true);
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState != 4) {
+            return;
+          }
+          if (xhr.status === 200) {
+            console.log("res", xhr.responseText);
+            var res = JSON.parse(xhr.responseText);
+            var imdbRating = res.imdbRating;
+            createSlide(poster, year, title, imdbID, imdbRating);
+          } else {
+            console.log("err", xhr.responseText);
+          }
+        };
+      });
+    } else {
+      console.log("err", xhr.responseText);
+      globalConstants.infoContainer.innerText = xhr.responseText;
+    }
+  };
 }
 
 export function searchClick() {
