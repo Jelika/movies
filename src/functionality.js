@@ -72,3 +72,4 @@ export function searchClick() {
     } else infoContainer.innerText = `No results for ${keyWord}`;
   }
 }
+

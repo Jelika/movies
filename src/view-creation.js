@@ -44,5 +44,3 @@ export function generateDropDownYears() {
   console.log('год', variables.queryYear);
   });
 }
-
-
