@@ -1,0 +1,14 @@
+a.footer-link {
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    display: flex;
+}
+
+.github-logo {
+    margin-right: 5px;
+    height: 20px;
+}
+
+.text-muted {
+    color: #fff!important;
+}

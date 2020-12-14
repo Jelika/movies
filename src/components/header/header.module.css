@@ -1,0 +1,9 @@
+.navbar-brand {
+    display: inline-flex;
+    font-family: "Poppins", sans-serif;
+    line-height: inherit;
+    padding: 30px;
+    white-space: nowrap;
+    color: #fff ;
+  }
+  
