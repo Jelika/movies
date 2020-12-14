@@ -5,7 +5,7 @@ import {generateDropDownYears} from "./view-creation";
 import {addListeners} from "./events-creation"
 
 window.onload = () => {
-  getMovieInfo("Dream", 1);
+  getMovieInfo("home", 1);
   generateDropDownYears();
   addListeners();
 };
