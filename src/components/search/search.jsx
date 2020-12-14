@@ -7,9 +7,9 @@ function handleInputChange(){
 };
 
   return (
-    <form className="form-group" autocomplete="off">
+    <form className="form-group" autoComplete="off">
     <div className={styles.form_row}>
-      <input placeholder="Start typing..." onChange={() => handleInputChange()} autofocus="" className="search-input form-control form-control-lg" type="text"
+      <input placeholder="Start typing..." onChange={() => handleInputChange()} autoFocus="" className="search-input form-control form-control-lg" type="text"
        id="input">
        </input>
        <a href="#" className={styles['close'], styles['d-none']}></a>
