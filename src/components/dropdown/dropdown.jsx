@@ -1,9 +1,8 @@
 import React, { useState, useRef } from "react";
 import styles from "./dropdown.module.css";
 
-const Dropdown = () => {
+const Dropdown = ({setCurrentYearNumber}) => {
   const currentYear = useRef("");
-  const [currentYearNumber, setCurrentYearNumber] = useState("");
 
   const dropdownYears = range(1960, 2020);
   const options = dropdownYears.map((number, i) => (

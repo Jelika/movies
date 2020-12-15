@@ -1,0 +1,74 @@
+.card {
+    border: 3px solid rgba(145, 145, 145, 0.3);
+    height: 70%;
+    width: 300px;
+  }
+  .poster {
+    -o-object-fit: cover;
+    object-fit: cover;
+    height: 445px;
+    background-size: cover;
+  }
+  .card-img-top {
+    border-top-left-radius: calc(0.25rem - 1px);
+    border-top-right-radius: calc(0.25rem - 1px);
+  }
+  .footer-card {
+    width: 298px;
+  }  
+  .link-card {
+    margin-top: 5px;
+    margin-bottom: 0;
+    height: 10px;
+    text-align: center;
+  }
+  .title {
+    margin-left: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  h5,
+.github,
+.year,
+.MDb {
+  font-size: 1rem;
+  position: relative;
+  margin: 0;
+  padding-top: 5px;
+  padding-left: 10px;
+  color: rgb(145, 145, 145);
+}
+
+.title:hover {
+  color: rgb(195, 240, 247) !important;
+}
+
+.MDb {
+  left: 80px;
+  bottom: 3px;
+}
+
+.year {
+  left: 35px;
+  bottom: 3px;
+}
+
+:root {
+  --swiper-theme-color: rgb(145, 145, 145) !important;
+}
+.film-star {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    bottom: 5px;
+    left: 90px;
+  }
+  
+  .film-rating,
+  .year,
+  .title {
+    font-size: 20px;
+    font-weight: 650;
+  }
+  

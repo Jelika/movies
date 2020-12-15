@@ -7,43 +7,56 @@ import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 import "swiper/components/scrollbar/scrollbar.scss";
 
-// install Swiper components
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
-const FilmSwiper = () => {
+const FilmSwiper = ({ currentYearNumber, currentKeyWord }) => {
   const [slides, setSlides] = useState([]);
-  const [currentSlides, setCurrentSlides] = useState(null);
+  const [currSlides, setCurrSlides] = useState(null);
   const spinner = document.querySelector(".spinnerContainer");
   const infoContainer = document.querySelector(".info");
 
-  function createSlide(poster, year, title, imdbID, imdbRating) {
-    let slide = 
-    <div className="swiper-slide" >
-        <div className="card">
+  function createSlides() {
+    const slideItems = Array.from(slides).map((slideProp, index) => (
+      <SwiperSlide key={index} virtualIndex={index}>
+        <div className="swiper-slide">
+          <div className={styles.card}>
             <div className="slide-main">
-                <img className="poster card-img-top" src="${poster}" alt="${title}" onerror="this.onError=null; this.src='http://dummyimage.com/300x400/99cccc.gif&text=No+poster';" />
-                </div>
-                <div className="footer-card">
-                    <a href="https://www.imdb.com/title/${imdbID}/" className="link-card"><p class="title">${title}</p></a>
-                    <div className="movie-info">
-                        <span className="year">${year}</span>
-                        <img className="film-star" src="assets/img/star.png" />
-                        <span className="MDb"><a className="film-rating">IMDb:${imdbRating}</a></span>
-                    </div>
-                </div>
+              <img
+                className={(styles["poster"], styles["card-img-top"])}
+                src={slideProp.posterProp}
+                alt={slideProp.titleProp}
+                onerror="this.onError=null; this.src='http://dummyimage.com/300x400/99cccc.gif&text=No+poster';"
+              />
             </div>
-    </div>;
-    setSlides(slides.push(slide));
-    if (slides.length === 9) {
-      slides.map((slideContent, index) => {
-        <SwiperSlide key={index} virtualIndex={index}>
-          {slideContent}
-        </SwiperSlide>;
-      });
-      setCurrentSlides(slides);
-    }
-    console.log("my", slides);
+            <div className="footer-card">
+              <a href={slideProp.imdbIdUrlProp} className={styles["link-card"]}>
+                <p className="title">{slideProp.titleProp}</p>
+              </a>
+              <div className="movie-info">
+                <span className={styles.year}>{slideProp.yearProp}</span>
+                <img
+                  className={styles["film-star"]}
+                  alt="star"
+                  src="assets/img/star.png"
+                />
+                <span className={styles["MDb"]}>
+                  <a
+                    href={slideProp.imdbIdUrlProp}
+                    className={styles["film-rating"]}
+                  >
+                    IMDb:{slideProp.imdbRatingProp}
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </SwiperSlide>
+    ));
+    setCurrSlides(slideItems);
+    console.log("currebtS", currSlides);
   }
+
   function getMovieInfo(keyWord, page, queryYear) {
     const url = `https://www.omdbapi.com/?s=${keyWord}&page=${page}&y=${queryYear}&apikey=e1ab60a9`;
     if (spinner) {
@@ -63,8 +76,18 @@ const FilmSwiper = () => {
             fetch(urlRating)
               .then((result) => result.json())
               .then((res) => {
-                let imdbRating = res.imdbRating;
-                createSlide(poster, year, title, imdbID, imdbRating);
+                let filmCardObject = {
+                  posterProp: poster,
+                  yearProp: year,
+                  titleProp: title,
+                  imdbIdUrlProp: `https://www.imdb.com/title/${imdbID}/`,
+                  imdbRatingProp: res.imdbRating,
+                };
+                setSlides(slides.push(filmCardObject));
+
+                if (slides.length >= 9) {
+                  createSlides();
+                }
                 if (infoContainer) {
                   infoContainer.innerText = `Showing results for ${keyWord}`;
                 }
@@ -77,22 +100,27 @@ const FilmSwiper = () => {
         }
       });
   }
+
   useEffect(() => {
-    getMovieInfo("home", 1, "");
+    getMovieInfo(currentKeyWord, 1, currentYearNumber);
   }, []);
+
+  useEffect(() => {
+    setSlides([]);
+    setCurrSlides(null);
+    console.log("слово", currentKeyWord);
+    getMovieInfo(currentKeyWord, 1, currentYearNumber);
+  }, [currentKeyWord]);
 
   return (
     <Swiper
       spaceBetween={10}
-      slidesPerView={3}
+      slidesPerView={1}
       navigation
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log("slide change")}
-      //onReachEnd={() => {reachEnd}}
     >
-      {currentSlides}
+      {currSlides ? currSlides : null}
     </Swiper>
   );
 
@@ -126,24 +154,6 @@ const FilmSwiper = () => {
   //           dynamicMainBullets: 10,
   //         },
   //       });
-
-  //   return (
-  {
-    /* <div className="wrapper-slider">
-      <div className="slider">
-        <div className="swiper-container swiper-container-initialized swiper-container-horizontal" style="cursor: grab;">
-          <div className="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
-          </div>
-          <div className="swiper-btn swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide"
-            aria-disabled="false"></div>
-          <div className="swiper-btn swiper-button-next" tabindex="0" role="button" aria-label="Next slide"
-            aria-disabled="false"></div>
-          <div className="swiper-scrollbar"></div>
-        </div>
-      </div>
-      </div> */
-  }
-  //   );
 };
 
 export default FilmSwiper;
