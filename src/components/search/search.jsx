@@ -1,11 +1,12 @@
 import React,{useRef} from "react";
 import styles from "./search.module.css";
 
-const Search = ({setCurrentKeyWord}) => {
+const Search = ({setCurrentKeyWord,setIsNewSearchWord}) => {
   const inputEl = useRef(null);
  
   const onButtonClick = (event) => {
     setCurrentKeyWord( inputEl.current.value);
+    setIsNewSearchWord(true);
     event.preventDefault();
   };
 

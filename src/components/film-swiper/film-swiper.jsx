@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./film-swiper.module.css";
+import star from "../../assets/star.png";
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.scss";
@@ -9,23 +10,23 @@ import "swiper/components/scrollbar/scrollbar.scss";
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
-const FilmSwiper = ({ currentYearNumber, currentKeyWord }) => {
+const FilmSwiper = ({ currentYearNumber, currentKeyWord,isNewSearchWord }) => {
   const [slides, setSlides] = useState([]);
   const [currSlides, setCurrSlides] = useState(null);
   const spinner = document.querySelector(".spinnerContainer");
   const infoContainer = document.querySelector(".info");
+  const noPoster='http://dummyimage.com/300x400/99cccc.gif&text=No+poster';
 
-  function createSlides() {
-    const slideItems = Array.from(slides).map((slideProp, index) => (
+  function createSlides(newSlides) {
+    const slideItems =newSlides.map((slideProp, index) => (
       <SwiperSlide key={index} virtualIndex={index}>
         <div className="swiper-slide">
           <div className={styles.card}>
             <div className="slide-main">
               <img
                 className={(styles["poster"], styles["card-img-top"])}
-                src={slideProp.posterProp}
+                src={slideProp.posterProp||noPoster}
                 alt={slideProp.titleProp}
-                onerror="this.onError=null; this.src='http://dummyimage.com/300x400/99cccc.gif&text=No+poster';"
               />
             </div>
             <div className="footer-card">
@@ -37,7 +38,7 @@ const FilmSwiper = ({ currentYearNumber, currentKeyWord }) => {
                 <img
                   className={styles["film-star"]}
                   alt="star"
-                  src="assets/img/star.png"
+                  src={star}
                 />
                 <span className={styles["MDb"]}>
                   <a
@@ -58,6 +59,8 @@ const FilmSwiper = ({ currentYearNumber, currentKeyWord }) => {
   }
 
   function getMovieInfo(keyWord, page, queryYear) {
+    setCurrSlides(null);
+    let newSlides=[];
     const url = `https://www.omdbapi.com/?s=${keyWord}&page=${page}&y=${queryYear}&apikey=e1ab60a9`;
     if (spinner) {
       spinner.classList.remove("d-none");
@@ -83,10 +86,11 @@ const FilmSwiper = ({ currentYearNumber, currentKeyWord }) => {
                   imdbIdUrlProp: `https://www.imdb.com/title/${imdbID}/`,
                   imdbRatingProp: res.imdbRating,
                 };
-                setSlides(slides.push(filmCardObject));
+               console.log(slides)
+               newSlides.push(filmCardObject);
 
-                if (slides.length >= 9) {
-                  createSlides();
+                if (newSlides.length >= 10) {
+                  createSlides(newSlides);
                 }
                 if (infoContainer) {
                   infoContainer.innerText = `Showing results for ${keyWord}`;
@@ -103,19 +107,11 @@ const FilmSwiper = ({ currentYearNumber, currentKeyWord }) => {
 
   useEffect(() => {
     getMovieInfo(currentKeyWord, 1, currentYearNumber);
-  }, []);
-
-  useEffect(() => {
-    setSlides([]);
-    setCurrSlides(null);
-    console.log("слово", currentKeyWord);
-    getMovieInfo(currentKeyWord, 1, currentYearNumber);
-  }, [currentKeyWord]);
+  }, [currentKeyWord,currentYearNumber]);
 
   return (
     <Swiper
       spaceBetween={10}
-      slidesPerView={1}
       navigation
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
