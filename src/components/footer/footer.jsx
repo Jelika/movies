@@ -6,10 +6,7 @@ function Footer() {
   return (
     <footer className="footer">
       <a className={styles["footer-link"]} href="https://github.com/Jelika">
-        <img
-          className={styles["github-logo"]}
-          src={github}
-        ></img>
+        <img className={styles["github-logo"]} alt={'github'} src={github}></img>
         <h5 className={styles["text-muted"]}>Jelika GitHub</h5>
       </a>
     </footer>

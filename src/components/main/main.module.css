@@ -20,7 +20,7 @@ main{
     color: rgb(145, 145, 145) !important;
   }
   
-  .spinner-border {
+  .spinner_border {
     display: flex!important;
     width: 2rem;
     height: 2rem;
@@ -34,4 +34,6 @@ main{
       margin-left: 48vw;
       margin-top: 15px;
   }
-  
+  .d_none {
+    display: none !important;
+  }

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import styles from "./dropdown.module.css";
 
-const Dropdown = ({setCurrentYearNumber}) => {
+const Dropdown = ({ setCurrentYearNumber }) => {
   const currentYear = useRef("");
 
   const dropdownYears = range(1960, 2020);
@@ -14,24 +14,25 @@ const Dropdown = ({setCurrentYearNumber}) => {
     return [start, ...range(start + 1, end)];
   }
 
-  function yearCategory() {
+  const yearCategory = () => {
     setCurrentYearNumber(currentYear.current.value);
-  }
+  };
 
   return (
-    <div className ={styles.yearContainer}><div className={styles.yearText}>Choose year: </div>  
+    <div className={styles.yearContainer}>
+      <div className={styles.yearText}>Choose year: </div>
       <div className={styles["select-wrapper"]}>
         <div>
-      <select
-        onClick={() => yearCategory()}
-        ref={currentYear}
-        className={styles.selectElementId}
-      >
-        <option key="0"></option>
-        {options}
-      </select>
+          <select
+            onClick={() => yearCategory()}
+            ref={currentYear}
+            className={styles.selectElementId}
+          >
+            <option key="0"></option>
+            {options}
+          </select>
+        </div>
       </div>
-    </div>
     </div>
   );
 };
