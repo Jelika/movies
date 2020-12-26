@@ -104,6 +104,7 @@ const FilmSwiper = ({ currentYearNumber, currentKeyWord, info }) => {
   return (
     <Swiper
       spaceBetween={10}
+      activeSlideKey={0}
       navigation
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}

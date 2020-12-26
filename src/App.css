@@ -6,6 +6,10 @@
     border-bottom: 3px solid rgba(62, 134, 163, 1);
   }
 
+  .swiper-container {
+    height: 100vh;
+  }
+
   footer {
     border-top: 3px solid rgba(62, 134, 163, 1);
     display: flex;
